@@ -18,27 +18,21 @@ let mudando_direcao = false;
 let dx = 25;
 //Velocidade Vertical.
 let dy = 0;
-
 // Puxa o Elemento Canvas - Seleciona a Tela.
 const tela = document.querySelector('canvas');
-
 // Retorna um desenho em duas Dimensões - Pinta na Tela.
 const pincel = canvas.getContext("2d");
-
 // Variavel responsavel por Controlar a Velocidade da Cobra.
 let velocidade = 170;
-
-let btn_reiniciar = document.getElementById('btn-reiniciar');
-
 // Função Central, Responsavel por Puxar todas as Outras.
 atualizaTela();
-
+// Função para Gerar Comida.
 gerar_comida();
 
 document.addEventListener("keydown", leDoTeclado);
 
 
-
+// Função Responsavel por Atualizar a tela, e chamar todas as função para fazer o jogo funcionar.
 function atualizaTela(){
 
     if(se_o_jogo_acabar()) return;
@@ -54,7 +48,7 @@ function atualizaTela(){
         speed();
     }, velocidade)
 }
-
+// Função Resposavel por Criar o Grid.
 function limpaTela() {
     var descer = 0;
     while (descer <= 600) {
@@ -71,13 +65,11 @@ function limpaTela() {
         descer = descer + 25;
     }
 }
-
 // Pintar a Cobra no Canvas.
 function pintarCobra(){
     // Desenha as Partes.
     cobra.forEach(pintarPartedaCobra);
 }
-
 // Pintar Comida no Canvas.
 function pintar_comida(){
     pincel.fillStyle = 'Crimson';
@@ -85,12 +77,12 @@ function pintar_comida(){
     pincel.fillRect(comida_x, comida_y, 25, 25);
     pincel.strokeRect(comida_x, comida_y, 25, 25);
 }
-
+// Função Resposavel por randomizar a posição da comida, fazendo ela aparecer em locais aleatórios.
 function randomizar_comida(min, max){
 
     return Math.round((Math.random() * (max-min) + min) /25) * 25;
 }
-
+// Função Responsavel por Gerar a Comida.
 function gerar_comida(){
     // Gera a Comida em uma Posição Aleatória na Horizontal(X).
     comida_x = randomizar_comida(0, tela.width - 25);
@@ -102,7 +94,7 @@ function gerar_comida(){
         if(ela_comeu) gerar_comida();
     });
 }
-
+// Função Responsavel por pintar as Partes da Cobra.
 function pintarPartedaCobra(parteCobra){
     // Selecione a Cor para Pintar a Cobra.
     pincel.fillStyle = 'lightgreen';
@@ -114,7 +106,7 @@ function pintarPartedaCobra(parteCobra){
     // Pinta a Borda ao redor da Cobra.
     pincel.strokeRect(parteCobra.x, parteCobra.y, 25, 25);
 }
-
+// Função Responsavel por Ler o Teclado, as teclas pressionadas e direcionar a cobra para a direção apontada.
 function leDoTeclado(event){
     const TECLA_ESQUERDA = 37;
     const TECLA_DIREITA = 39;
@@ -129,27 +121,27 @@ function leDoTeclado(event){
     const para_direita = dx === 25;
     const para_esquerda = dx === -25;
 
-        if(tecla_pressionada === TECLA_ESQUERDA && !para_direita){
+        if(tecla_pressionada == TECLA_ESQUERDA && !para_direita){
             dx = -25;
             dy = 0;
         }
 
-        if(tecla_pressionada === TECLA_CIMA && !para_baixo){
+        if(tecla_pressionada == TECLA_CIMA && !para_baixo){
             dx = 0;
             dy = -25;
         }
 
-        if(tecla_pressionada === TECLA_DIREITA && !para_esquerda){
+        if(tecla_pressionada == TECLA_DIREITA && !para_esquerda){
             dx = 25;
             dy = 0;
         }
 
-        if(tecla_pressionada === TECLA_BAIXO && !para_cima){
+        if(tecla_pressionada == TECLA_BAIXO && !para_cima){
             dx = 0;
             dy = 25;
         }
 }
-
+// Função Responsavel por fazer com que quando a cobra bate numa parede o jogo acabe.
 function se_o_jogo_acabar(){
     for (let i = 1; i < cobra.length; i++) {
         if (cobra[i].x === cobra[0].x && cobra[i].y === cobra[0].y) return true
@@ -161,7 +153,7 @@ function se_o_jogo_acabar(){
 
       return bater_parede_esquerda || bater_parede_direita || bater_parede_cima || bater_parede_baixo
 }
-
+// Função Responsavel pelo Movimento da Cobra.
 function Mover_Cobra(){
      // Cria uma Nova Cabeça para a Cobra.
      const cabeca = {x: cobra[0].x + dx, y: cobra[0].y + dy};
@@ -190,20 +182,13 @@ function Mover_Cobra(){
              cobra.pop();
         }
 }
-
+// Função Responsavel por Controlar a Velocidade da Cobra.
 function speed(){
     if(pontuacao >= 100){ velocidade = 120};
     if(pontuacao >= 300){ velocidade = 90}
 }
-
-function reiniciar(){
-    atualizaTela();   
-}
-
-
+// Atualiza a Função da Velocidade.
 speed();
-
-btn_reiniciar.addEventListener('click', reiniciar);
 
 
 
