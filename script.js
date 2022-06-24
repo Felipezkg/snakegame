@@ -1,3 +1,4 @@
+
 // Variavel da Cobra
 let cobra = [ 
     {x:250, y:250}, 

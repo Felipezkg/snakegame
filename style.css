@@ -14,7 +14,7 @@ body{
 .card{
     position: absolute;
     width: 400px;
-    height: 80px;
+    height: 120px;
     border-radius: 50px;
     margin-left: 752px;
     text-align: center;
@@ -22,20 +22,15 @@ body{
     font-size: 28px;
     margin-top: 790px;
     font-family: 'Staatliches', 'cursive';
-    
-    
-  
 }
 
 .top_card{
     text-align: center;
     padding: -10px;
-    
 }
 
 .title{
     position: absolute !important;
-    
     left: 40%;
     bottom: 86%;
     font-size: 70px;
@@ -47,4 +42,13 @@ body{
     position: absolute;
     left: 55%;
     bottom: 9%;
+}
+
+.part{
+    position: absolute;
+    color: rgb(140, 0, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 23px;
+    bottom: 8px;
+    left: 28px;
 }
